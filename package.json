@@ -7,6 +7,7 @@
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.23.4",
     "@gera2ld/plaid": "~2.7.0",
+    "@gera2ld/plaid-common-react": "~2.7.0",
     "@gera2ld/plaid-test": "~2.6.0",
     "del-cli": "^5.1.0",
     "husky": "^8.0.3",
