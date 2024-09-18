@@ -32,20 +32,21 @@ function renderToolbar(mm: Markmap, wrapper: HTMLElement) {
 export default function MarkmapHooks() {
   const [value, setValue] = useState(initValue);
   // Ref for SVG element
-  const refSvg = useRef<SVGSVGElement>();
+  const refSvg = useRef<SVGSVGElement>(null);
   // Ref for markmap object
   const refMm = useRef<Markmap>();
   // Ref for toolbar wrapper
-  const refToolbar = useRef<HTMLDivElement>();
+  const refToolbar = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Create markmap and save to refMm
-    if (refMm.current) return;
-    const mm = Markmap.create(refSvg.current);
+    if (refMm.current || !refToolbar.current) return;
+
+    const mm = Markmap.create(refSvg.current as SVGSVGElement);
     console.log('create', refSvg.current);
     refMm.current = mm;
     renderToolbar(refMm.current, refToolbar.current);
-  }, [refSvg.current]);
+  }, [refSvg.current, refToolbar.current]);
 
   useEffect(() => {
     // Update data for markmap once value is changed
@@ -56,7 +57,7 @@ export default function MarkmapHooks() {
     mm.fit();
   }, [refMm.current, value]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
   };
 
