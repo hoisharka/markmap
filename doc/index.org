@@ -1,0 +1,61 @@
+* markmap 분석
+
+
+* 예제 파일을 실행해 보자.
+  깃허브 소스로 빌드한 결과물로 예제 실행.
+** 예제
+    https://stackblitz.com/edit/markmap-react?file=src%2Fmarkmap-hooks.tsx,package.json
+
+** 예제 코드 추가
+*** markmap 프로젝트 폴더 하위에 examples 폴더 추가
+
+*** examples 폴더 안에서 vite 프로젝트 생성.
+    - 프로젝트 생성 명령어 실행. 프로젝트명은 simple
+     #+begin_src bash
+       pnpm create vite simple --tempate react-ts
+     #+end_src
+
+    - markmap root dir > pnpm-workspace.yaml 파일 수정
+     #+DOWNLOADED: screenshot @ 2024-09-11 21:24:06
+      [[file:예제_파일을_실행해_보자./2024-09-11_21-24-06_screenshot.png]]
+      
+    - 패키지 설치
+     #+begin_src bash
+       pnpm install
+     #+end_src
+
+*** simple 프로젝트의 pakcage.json > dependencies 수정
+     아래와 같이 dependencies 수정 후 pnpm install 재실행.
+     이러면 markmap 프로젝트에서 빌드한 패키지를 가져다 쓸 수 있을 것이라 판단.
+    #+begin_src js
+      "dependencies": {
+	"d3": "^7.9.0",
+	"markmap-common": "workspace:*",
+	"markmap-lib": "workspace:*",
+	"markmap-toolbar": "workspace:*",
+	"markmap-view": "workspace:*",
+	"react": "^18.3.1",
+	"react-dom": "^18.3.1"
+      },
+    #+end_src
+    
+*** 소스코드 붙여넣기
+    예제 소스의 src 하위 내용 붙여넣기. stackblitz 에서 파일 자체를 다운받을 수 있고 붙여넣기하면 됨.
+    #+DOWNLOADED: screenshot @ 2024-09-11 21:40:07
+    [[file:예제_파일을_실행해_보자./2024-09-11_21-40-07_screenshot.png]]
+
+*** markmap 빌드
+   #+begin_src bash
+      pnpm build
+   #+end_src
+    
+** 예제 실행
+*** simple 예제 dev서버 실행 
+   #+begin_src bash
+     pnpm --filter simple dev
+   #+end_src
+
+*** 실행 화면
+    #+DOWNLOADED: screenshot @ 2024-09-18 10:41:59
+    [[file:예제_파일을_실행해_보자./2024-09-18_10-41-59_screenshot.png]]
+    
