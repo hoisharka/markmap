@@ -59,3 +59,26 @@
     #+DOWNLOADED: screenshot @ 2024-09-18 10:41:59
     [[file:예제_파일을_실행해_보자./2024-09-18_10-41-59_screenshot.png]]
     
+
+** husky 통과하기
+   기존 markmap 프로젝트는 [[https://github.com/typicode/husky][husky]]를 사용하고 있다. husky는 git 명령어에 훅을 거는 용도로 사용된다.
+   기존 markmap 프로젝트에서는 push 명령어 전에 lint를 실행하고 정상 실행됐을 경우에만 push되게 하고 있었다.
+
+*** 문제1. simple 프로젝트에서 eslint 관련 내용 제거.
+    - `examples/simple` 프로젝트는 vite cli templete로 생성한 프로젝트이다. lint에 대한 설정이 기본으로 프로젝트에 생성된다.
+    - 그런데 기존 프로젝트 root의 eslint 패키지의 버전과 다른 버전의 eslint 패키지가 설치되어있어 eslint 옵션 명령어가 일부 달라서 문제가 됐다.
+    - 그래서 simple 내부의 eslint관련 패키지들와 설정 파일도 모두 지워줬다.
+    - 대신 root에 react관련 lint 설정을 추가하는 것으로 마무리했다.
+    - 수정내용: https://github.com/hoisharka/markmap/commit/bb06ef5a44f499ded8954a2c5d8578d4de527afd
+      
+*** 문제2. eslint warning
+    - git push할 때 husky가 eslint를 실행될 때 warning이 발생해도 push는 실패한다.
+    - 미리 root package.json에 설정된 `lint:fix` 명령어를 실행해서 warning을 제거했다.
+    - push 실패시 콘솔 내용
+      #+DOWNLOADED: screenshot @ 2024-09-18 20:55:34
+      [[file:예제_파일을_실행해_보자./2024-09-18_20-55-34_screenshot.png]]
+
+      
+    - 수정내용: https://github.com/hoisharka/markmap/commit/58c53ea181c3d4c1f74da6428bc6d679f70bab23
+
+
